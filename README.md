@@ -17,7 +17,7 @@
 3. 修改`let currentEngine = "bing";`可修改默认搜索引擎.
 
 *效果如图:*
-1. 搜索框显示是效果:
+1. 搜索框显示时效果:
 <img width="2554" height="1243" alt="image" src="https://github.com/user-attachments/assets/d3efab6d-8352-48e7-a038-8cbcbfb31e81" />
 2. 搜索框隐藏时效果:
 <img width="2559" height="1240" alt="image" src="https://github.com/user-attachments/assets/9dbde707-8139-4e66-bcd5-f4f5ce433604" />
