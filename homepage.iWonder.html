@@ -274,33 +274,275 @@
       // #region 自定义设置区
       // 默认设置 - 当localStorage中没有值时将使用这些设置
 
-
       const config = {
         // 默认搜索引擎
         defaultSearchEngine: "baidu",
         // 是否显示搜索框
         isDefaultSearchBoxVisible: "yes",
-        // 是否开机随机背景图  若值为"yes", 但imagePath路径为"", 则会一直弹窗提示配置imagePath
-        isRandomBackgroundEnabled: "yes",
-        // 本地图片文件夹路径
-        imagePath: "",
-        // 本地图片文件夹路径下的图片名列表
-        images: [],
+        // 背景图绝对路径列表
+        images: [
+          "F:/000-share/picture/wallpaper/0e83e5ac3b69a3b53dbea1b0a88ead4560f4c03b3d8078-Wi3Z7e.png",
+          "F:/000-share/picture/wallpaper/0-JetBrainsBackGround.png",
+          "F:/000-share/picture/wallpaper/01_gettyimages_669360624_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/02_gettyimages_583991178_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/03_gettyimages_846147812_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/04_gettyimages_471418563_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/4k Windows 12 简约 极简 壁纸 电脑 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/4k windows12 微软 创意 设计 高清 电脑 壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/4K 风景 倒影 ɽˮ 平静 高清 壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/05_gettyimages_166041214_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/06_gettyimages_157675600_medium_resized.jpg",
+          "F:/000-share/picture/wallpaper/6K 风景 云 树 草地 ˮ 倒影 绘画 自然 桌面 壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/6k 自然 树 ѩ 湖水 倒影 冬天风景图片壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/07_gettyimages_169396624_high_resized.jpg",
+          "F:/000-share/picture/wallpaper/08_gettyimages_142068861_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/09_gettyimages_108348088_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/10_gettyimages_181866352_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/11_gettyimages_183041629_high_resized.jpg",
+          "F:/000-share/picture/wallpaper/12_gettyimages_495288678_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/13_gettyimages_607293504_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/14_gettyimages_508893814_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/15_gettyimages_516688938_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/16_gettyimages_761608821_high_resized.jpg",
+          "F:/000-share/picture/wallpaper/17_gettyimages_520700958_high_resized.jpg",
+          "F:/000-share/picture/wallpaper/18_gettyimages_592008326_super_resized.jpg",
+          "F:/000-share/picture/wallpaper/2025_06_24_12_51_07.png",
+          "F:/000-share/picture/wallpaper/2025年春节 新年 红色灯笼 鸟儿 喜庆 红花 雪花 4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/Aetas 唯美动漫风景人物3440x1440壁纸 by ThamuzMartu_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/beautiful_autumn_2-wallpaper-2560x1440.jpg",
+          "F:/000-share/picture/wallpaper/blue_crocus_flowers_2-wallpaper-3840x2160.jpg",
+          "F:/000-share/picture/wallpaper/Devils Bridge 桥梁和绿色树木 河流 倒映6k自然风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/eva新世纪福音战士 森林 轨道 唯美 2560x1600动漫壁纸高清_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/fall_foliage-wallpaper-2880x1620.jpg",
+          "F:/000-share/picture/wallpaper/Firewatch看火人 黑暗 夜晚 极简主义5k壁纸5120x2880_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/Girl in the forest.png",
+          "F:/000-share/picture/wallpaper/Girl in the forest-without-sign.png",
+          "F:/000-share/picture/wallpaper/infinity-829689.jpg",
+          "F:/000-share/picture/wallpaper/infinity-10637787.jpg",
+          "F:/000-share/picture/wallpaper/Jetbrains-BG夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网-扩图.jpg",
+          "F:/000-share/picture/wallpaper/MacOS Sequoia 内置高清 苹果 6K壁纸 6400x3552_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/MIKU初音未来 可爱小初音宝宝4K动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/misty_forest_road_autumn-wallpaper-3840x2160.jpg",
+          "F:/000-share/picture/wallpaper/summer_sunset_flowers-wallpaper-1920x1080.jpg",
+          "F:/000-share/picture/wallpaper/windows12 壁纸 4k 概念 创意 个性 艺术 电脑 桌面_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/阿尔卑斯山风景4k高清壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/阿尼亚 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/艾瑞丝 盖恩斯巴勒 艾莉丝4k手机壁纸竖屏_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/艾瑞丝 美女艾莉丝4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/艾瑞丝盖恩斯巴勒 最终幻想美女4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/八重神子 报纸 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 动漫美女 4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 动漫女孩 长发 4k桌面背景图_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 粉色长发女孩 4K动漫桌面壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 红色裙子动漫女孩4k手机壁纸竖屏_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 金克丝 3440x1440带鱼屏壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 可爱动漫女孩 马尾 蝴蝶结 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 可爱马尾辫少女4K电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 可爱又马尾辫女孩 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙 马尾辫可爱动漫少女4K电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙金发碧眼高马尾女孩4k壁纸3840_2400_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙少女 裙子 黑白风格 4k壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/报纸墙雪之下雪乃2560x1600动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/碧波荡漾 4k风景壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/布兰德福德路 作者 TheWanderingSoul 4K风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/草丛精灵4K动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/草原流星4K风景壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/橙色云插画4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/初音未来涂鸦墙4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/窗 ǽ 玫瑰花 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/窗边雨 初音 4k壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/创意艺术 设计 极光风景 河流 瀑布5k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/吹泡泡的女孩坐在小巷台阶上 ̦޺ 小花 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/春韵 树 鲜花 春天的风景4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/春韵 树枝小花 春天风景2880x1800分辨率壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/刀剑神域 报纸墙少女 亚丝娜 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/岛屿 大海 海滩 棕榈树 房子 云 插画 小岛日落风景4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/地下城与勇士 女孩 小提琴 公园 汽车4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/等公交车的女孩4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/迪士尼小美人鱼4k高清壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/冬天 红色果实 冬季 ѩ 4k壁纸图片_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/冬天 女孩 围巾 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/动漫 厚涂 女孩 脸 闭眼 尖耳朵 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/动漫女孩 侧脸 光 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/动漫女孩 蝴蝶 出水芙蓉 4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/动漫女孩 树下 遛狗 水果 4k 壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/短发动漫女孩 红色眼睛 个性 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/短发女孩 蓝玫瑰 4K动漫壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/敦煌风美女 绘画 唯美 高清4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/二次元动漫女生 花 天空 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/翻转-夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/房子 鲜花 天空 白云 夕阳 4k风景壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/粉色大波浪女孩 报纸墙 4k动漫壁纸3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/粉色樱花4k高清壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/粉色长发动漫女孩楪祈 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/枫叶,水,秋天,一叶知秋 4k壁纸 3840x2400_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/高地 月亮 云 ɽ 唯美动漫风景4k壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/高山星空唯美背景4k简约壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/古风女孩长发红色衣服4k壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/鬼灭之刃蝴蝶忍4k超高清壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/海边女孩6K动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/海边小屋 花草风景 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/荷花 蜻蜓 5k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/黑白风动漫人物女4k壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/厚涂画 红衣 女子 大眼睛 4k 动漫 壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/花田 女孩 草帽 背影 4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/灰原哀 高清动漫 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/极光风景 创意设计河流 瀑布5k电脑壁纸5120x2880_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/极简主义 简单的背景 星星 彗星 陨石 行星 矢量艺术4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/极简主义风景5k壁纸5120x2880_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/郊外旅行 爱心泳池 线条小狗4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/静谧 高山 湖泊 鲜花 漂亮风景 4k壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/可爱猫咪4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/可爱神里绫华 报纸墙 4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/孔明灯少女 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/扩图-1.jpg",
+          "F:/000-share/picture/wallpaper/扩图-2.jpg",
+          "F:/000-share/picture/wallpaper/两只小青蛙3440x1440带鱼屏壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/旅行者 孩子 奶奶 日落 高山 树 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿海 海浪 唯美艺术抽象风景画4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿河 by_Nikolai Lockertsen 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿色草地 ¶ˮ 夏 太阳 护眼4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿色风景 极简主义 简约 4K电脑壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿色护眼 简约绿色背景一朵玫瑰花4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿色家园4K风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/绿色家园风景2560x1600壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/玫瑰花3440x1440电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/梅花 春天 简约 6K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美丽的海边小屋风景4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美丽的渐变山房子简约风景4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美丽海滨风景2560x1600高清壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美少女 汽车 动漫风景 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美少女战士 报纸墙 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/美少女战士 月牙 4K动漫壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/梦幻景观 ɽ 湖水 星空 4K风景壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/明日香 Ϳѻ 老虎 4K壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/明日香4k电脑壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/魔女宅急便琪琪5k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/哪吒和敖丙 绘画 4k壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/宁静海边美景2560x1600电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女孩 耳环 粉色头发 鲜花 4k壁纸3840x2880_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女孩 猫咪 绿色盆栽 4k动漫壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女孩 叶子 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女孩短发 黑发 背部 后背 连衣裙 植物 阳台 建筑 绘画插图4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女孩子 美女 白鸟 天鹅 丛林 森林 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女生 夕阳 城市 动漫风景 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/女子 ˮ 光 唯美插画4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/哦你在四月kaori miyazono your lie in april 动漫背景人物4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/苹果 MacOS Sequoia 内置高清 6k电脑壁纸 6400_3552_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/苹果 抽象 艺术 5k电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/苹果 创意 简约 ɽ 田 风景 6k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/瀑布 房屋 山水画风景4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/祈愿 长发古风少女 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/清明 大山 房子 浓雾 4K风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/晴川万里 蓝天 白云 鲜花 树 2560_1600风景桌面壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/晴空落日风景4k壁纸3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/秋天 ɽ 树叶 夕阳 大海 唯美4k风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/秋天的味道 线条小狗5K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/秋天风景 树 狗 落叶 高山 唯美意境风景4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/日落山谷风景4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/萨勒芬妮 长卷发 窗户 报纸4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/三国之志4古风美女4k壁纸图片_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/三体智子8k动漫壁纸7680x4320_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/三体智子高清4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/森林 公路 阳光 4k风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/森林 桥梁 房屋 河流风景绘画4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/森林 树 少女 è 4k动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/森林列车风景2880x1800高清护眼壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/森林阳光风景2K高清壁纸2560x1600_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/山峰 月亮 晚上 4k风景壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/山谷简约设计3440x1440带鱼屏风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/山上小房子盆栽风景2560x1600桌面壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/商店 鲜花 树 房子 精美绘画风景 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/上午,雾,山,森林,自然的风景照片_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/少女 è 报纸墙 4K动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/树 ɽ 白云 简约设计风景5k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/帅气短发美少女 汽车 动漫风景 3440x1440带鱼屏壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/双马尾辫女孩 报纸墙 4k动漫电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/水下动漫人物精美4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/水中孤独的猫2560x1600电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/斯卡蒂2880x1800动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/太阳 ˮ 云 天空 日落 海洋 树 黄昏 日出 4k风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/天空 云 4k风景壁纸 3840x2560_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/天空 云 海 日落 唯美意境风景3440x1440壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/天空 云 龙卷风 ɽ 创意手绘风景4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/天空 云 阳光 黑暗 4K风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/田园小屋风景 4k壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/图片雨后的鲜花_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/晚上Windows XP Bliss  蓝白白云简约4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/微软win 黑色背影 简约4k桌面壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/微软win 简约 清爽 极简主义4k电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/微软win11 设计窗口 5k电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/微软win11 系统自带 3D 4K电脑壁纸3840x2400_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/微软Windows 10向日葵风景4k高清壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/唯美 女子 长发 意境 鲜花 背景 厚涂 高清动漫4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/温馨咖啡屋4k手绘壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/下午 趴在桌子的女孩4k动漫壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夏天 海边 房间 绿色植物 大海 风景4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夏天风景 蓝天白云 ɽ 树 房子 绿色草地 鲜花 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/线条小狗浪漫可爱4K电脑壁纸3840x2560_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/小兰 动漫人物 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/小兰 落泪 伤心难过 4K动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/小卖铺 食杂店 Сè 动漫风景 4k壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/心灵的平静漫步 by TomTC 壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/辛巴狗 菠萝 4k简约壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/辛巴狗 可爱水果系列 西瓜 椰子 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/辛巴狗 椰子 4k简约可爱壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/辛巴狗水果系列4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/雪之下雪乃 报纸墙 4k壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/雪之下雪乃 回头 海与你 夜晚 唯美 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/雪之下雪乃 雨中 3200x2000动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/亚丝娜 报纸墙 可爱少女 4k动漫壁纸 3840_2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夜晚 魔法树 4k风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网-扩图.jpg",
+          "F:/000-share/picture/wallpaper/夜晚 星空 ɽ 流星 简约 5k背景图电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/夜晚 星星 树 远坂凛 4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/艺术 设计 风景 极光 河流 瀑布5k风景壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/艺术站梦想家4k唯美动漫壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/英雄联盟剪纸刀妹艾瑞莉娅4K壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/樱花 水手服 动漫女子 透明伞 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/玉兰花 4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/原神胡桃 照片墙 相片墙 4K壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/原神胡桃相片墙3200_2000电脑桌面壁纸高清_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/原神胡桃照片墙4k手机壁纸竖屏2400x3840_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/原神神里绫华4k超清电脑桌面壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/远处的花园唯美风景绘画4k壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/葬送的芙莉莲芙莉莲 草地鲜花 4K动漫壁纸 3840x2400_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/早上 阳光 春天森林风景5120x1440双屏壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/长发马尾辫少女唯美背影3440x1440带鱼屏动漫壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/中野二乃 报纸 4k壁纸 3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/中野三玖涂鸦墙3200x2000电脑壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/紫罗兰永恒花园 薇尔莉特 4K壁纸3840x2160_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/最终幻想爱丽丝 高清4k手机壁纸竖屏_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/坐在草地上的动漫女孩 天空 风景 3440_1440带鱼屏壁纸_彼岸图网.jpg",
+          "F:/000-share/picture/wallpaper/· 薄雾 自然森林 春天 小径 4K风景壁纸_彼岸图网.jpg",
+        ],
       };
 
       // 从localStorage加载设置，如果不存在则使用默认值并保存
       function loadConfigFromLocalStorage() {
         for (const key in config) {
           if (Object.prototype.hasOwnProperty.call(config, key)) {
-            const element = config[key];
-            const savedValue = localStorage.getItem(key);
-            if (savedValue !== null) {
-              config[key] = JSON.parse(savedValue);
-            } else {
-              localStorage.setItem(key, JSON.stringify(element));
+            if (key === "images") {
+              // 数据量太大, 跳过同步
+              continue;
             }
+              const element = config[key];
+              const savedValue = localStorage.getItem(key);
+
+            if (savedValue == null) {
+              localStorage.setItem(key, JSON.stringify(element));
+              continue;
+            }
+            let t = JSON.parse(savedValue);
+            if (t.length === 0) {
+              localStorage.setItem(key, JSON.stringify(element));
+              continue;
+            }
+            config[key] = t;
           }
         }
+        // console.log("Loaded config:", config);
       }
 
       function configGet(key) {
@@ -351,10 +593,16 @@
         // 生成一个随机索引
         const randomIndex = Math.floor(Math.random() * imageNames.length);
         // 根据随机索引获取图片路径
-        const randomImage = configGet("imagePath") + imageNames[randomIndex];
+        const imagePath = imageNames[randomIndex];
         // 设置body的背景图片
-        document.body.style.backgroundImage = `url('file:///${randomImage}')`;
+        document.body.style.backgroundImage = `url('file:///${imagePath}')`;
       }
+
+      // function backgroundImageFolderSelectHandler(event) {
+      //   const folderPath = event.target.value;
+      //   console.log("Selected folder:", folderPath);
+      // }
+
       // #endregion 函数区
 
       // #region  事件注册区
@@ -412,7 +660,7 @@
           configSetAndSyncToLocalStorage(
             "defaultSearchEngine",
             option.dataset.value
-          ); 
+          );
           selectedEngine.innerHTML = option.innerHTML; // 更新显示的图标
           engineOptions.style.display = "none"; // 隐藏下拉菜单
         });
