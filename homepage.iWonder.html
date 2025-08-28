@@ -22,33 +22,56 @@
 
       body {
         /* 动态背景图片通过JS设置 */
-        background-size: cover; /* 图片覆盖整个屏幕 */
-        background-repeat: no-repeat; /* 图片不重复 */
-        background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
-        height: 100vh; /* body高度为视口高度 */
+        background-size: cover;
+        /* 图片覆盖整个屏幕 */
+        background-repeat: no-repeat;
+        /* 图片不重复 */
+        background-attachment: fixed;
+        /* 背景图片固定，不随滚动条滚动 */
+        height: 100vh;
+        /* body高度为视口高度 */
         margin: 0;
-        font-family: sans-serif; /* 默认字体 */
-        display: grid; /* 使用Grid布局 */
-        place-items: center; /* 在Grid布局中实现水平和垂直居中 */
+        font-family: sans-serif;
+        /* 默认字体 */
+        display: grid;
+        /* 使用Grid布局 */
+        place-items: center;
+        /* 在Grid布局中实现水平和垂直居中 */
       }
 
       /* --- 搜索框主要样式 --- */
       #search-form {
-        width: 36vw; /* 宽度为视口宽度的36% */
-        height: 46px; /* 固定高度 */
-        min-width: 300px; /* 最小宽度 */
+        width: 36vw;
+        /* 宽度为视口宽度的36% */
+        height: 46px;
+        /* 固定高度 */
+        min-width: 300px;
+        /* 最小宽度 */
         border: none;
         text-align: center;
         display: grid;
-        grid-template-rows: 1fr; /* 单行 */
-        grid-template-columns: 1fr 15fr 1fr; /* 定义三列的比例，用于放置 引擎选择-输入框-搜索按钮 */
-        border-radius: 23px; /* 圆角 */
-        background-color: rgba(255, 255, 255, 0.5); /* 半透明背景 */
+        grid-template-rows: 1fr;
+        /* 单行 */
+        grid-template-columns: 1fr 15fr 1fr;
+        /* 定义三列的比例，用于放置 引擎选择-输入框-搜索按钮 */
+        border-radius: 23px;
+        /* 圆角 */
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.25
+        ); /* 降低不透明度以突出玻璃效果 */
+        backdrop-filter: blur(10px); /* 玻璃拟态效果 */
+        -webkit-backdrop-filter: blur(10px); /* 兼容Safari */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* 柔和的阴影 */
+        border: 1px solid rgba(255, 255, 255, 0.18); /* 细微的边框 */
       }
 
       /* --- 搜索引擎选择器容器 --- */
       #search-engine-container {
-        position: relative; /* 相对定位，为下拉菜单提供定位上下文 */
+        position: relative;
+        /* 相对定位，为下拉菜单提供定位上下文 */
         display: grid;
         place-items: center;
       }
@@ -57,22 +80,28 @@
       #selected-engine {
         border-radius: 23px;
         background-color: transparent;
-        cursor: pointer; /* 鼠标悬停时显示手型光标 */
+        cursor: pointer;
+        /* 鼠标悬停时显示手型光标 */
         display: grid;
         place-items: center;
       }
+
       #selected-engine:hover {
         background-color: rgba(255, 255, 255, 0.7);
       }
 
       /* --- 搜索引擎下拉选项 --- */
       #engine-options {
-        display: none; /* 默认隐藏 */
-        position: absolute; /* 绝对定位，相对于 #search-engine-container */
-        top: 100%; /* 显示在父元素的正下方 */
+        display: none;
+        /* 默认隐藏 */
+        position: absolute;
+        /* 绝对定位，相对于 #search-engine-container */
+        top: 100%;
+        /* 显示在父元素的正下方 */
         width: 22px;
         background-color: rgba(255, 255, 255, 0.5);
-        z-index: 10; /* 确保下拉菜单在其他元素之上 */
+        z-index: 10;
+        /* 确保下拉菜单在其他元素之上 */
       }
 
       /* --- 单个搜索引擎选项 --- */
@@ -94,6 +123,7 @@
         display: grid;
         place-items: center;
       }
+
       #search-button:hover {
         background-color: rgba(69, 219, 216, 0.3);
       }
@@ -105,12 +135,26 @@
       }
 
       /* --- 搜索框隐藏/显示控制 --- */
+      .search-container {
+        will-change: transform, opacity; /* 预通知浏览器，优化动画性能 */
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+      }
       .search-container.hidden {
-        opacity: 0; /* 完全透明 */
-        visibility: hidden; /* 从渲染树中移除，不可交互 */
+        opacity: 0;
+        /* 完全透明 */
+        visibility: hidden;
+        /* 从渲染树中移除，不可交互 */
+        transform: translateY(-20px); /* 向上移动20px，实现从上到下的动画效果 */
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.2s;
       }
     </style>
   </head>
+
   <body>
     <!-- 搜索框容器，用于整体控制显示和隐藏 -->
     <div class="search-container hidden">
@@ -118,20 +162,9 @@
         <!-- 搜索引擎选择器 -->
         <div id="search-engine-container">
           <!-- 显示当前选中的引擎图标 -->
-          <div id="selected-engine">
-            <!-- 默认显示Bing图标 -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              aria-label="Bing"
-              role="img"
-              viewBox="0 0 512 512">
-              <path
-                d="M145,73l73,26V356l103-59-50-24-32-79,162,57v83L218,439l-73-41Z"
-                fill="#008373"></path>
-            </svg>
-          </div>
+          <!-- 默认使用的搜索图标 等待被js通过defaultSearchEngine变量自动填充图标内容-->
+          <div id="selected-engine"></div>
+
           <!-- 搜索引擎下拉选项列表 -->
           <div id="engine-options">
             <!-- Bing -->
@@ -196,7 +229,7 @@
           type="text"
           id="search-query"
           autocomplete="off"
-          placeholder="i want to know more about ..."
+          placeholder="i wonder more about you ..."
           autofocus />
 
         <!-- 搜索提交按钮 -->
@@ -236,31 +269,241 @@
     <div></div>
 
     <script>
+      // #region 自定义设置区
+      // 默认设置 - 当localStorage中没有值时将使用这些设置
+      const AppSettings = {
+        defaultSearchEngine: "baidu",
+        isDefaultSearchBoxVisible: true,
+      };
+
+      // 从localStorage加载设置，如果不存在则使用默认值并保存
+      function loadSettings() {
+        const savedEngine = localStorage.getItem("defaultSearchEngine");
+        if (savedEngine) {
+          AppSettings.defaultSearchEngine = savedEngine;
+        } else {
+          localStorage.setItem(
+            "defaultSearchEngine",
+            AppSettings.defaultSearchEngine
+          );
+        }
+
+        const savedVisibility = localStorage.getItem(
+          "isDefaultSearchBoxVisible"
+        );
+        if (savedVisibility !== null) {
+          // 将字符串 'true'/'false' 转换为布尔值
+          AppSettings.isDefaultSearchBoxVisible = savedVisibility === "true";
+        } else {
+          localStorage.setItem(
+            "isDefaultSearchBoxVisible",
+            AppSettings.isDefaultSearchBoxVisible
+          );
+        }
+      }
+
+      // 图片路径列表
+      const images = [
+        "F:/000-share/picture/wallpaper/0e83e5ac3b69a3b53dbea1b0a88ead4560f4c03b3d8078-Wi3Z7e.png",
+        "F:/000-share/picture/wallpaper/0-JetBrainsBackGround.png",
+        "F:/000-share/picture/wallpaper/01_gettyimages_669360624_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/02_gettyimages_583991178_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/03_gettyimages_846147812_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/04_gettyimages_471418563_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/4k Windows 12 简约 极简 壁纸 电脑 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/4k windows12 微软 创意 设计 高清 电脑 壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/4K 风景 倒影 ɽˮ 平静 高清 壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/05_gettyimages_166041214_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/06_gettyimages_157675600_medium_resized.jpg",
+        "F:/000-share/picture/wallpaper/6K 风景 云 树 草地 ˮ 倒影 绘画 自然 桌面 壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/6k 自然 树 ѩ 湖水 倒影 冬天风景图片壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/07_gettyimages_169396624_high_resized.jpg",
+        "F:/000-share/picture/wallpaper/08_gettyimages_142068861_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/09_gettyimages_108348088_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/10_gettyimages_181866352_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/11_gettyimages_183041629_high_resized.jpg",
+        "F:/000-share/picture/wallpaper/12_gettyimages_495288678_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/13_gettyimages_607293504_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/14_gettyimages_508893814_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/15_gettyimages_516688938_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/16_gettyimages_761608821_high_resized.jpg",
+        "F:/000-share/picture/wallpaper/17_gettyimages_520700958_high_resized.jpg",
+        "F:/000-share/picture/wallpaper/18_gettyimages_592008326_super_resized.jpg",
+        "F:/000-share/picture/wallpaper/2025_06_24_12_51_07.png",
+        "F:/000-share/picture/wallpaper/2025年春节 新年 红色灯笼 鸟儿 喜庆 红花 雪花 4K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/Aetas 唯美动漫风景人物3440x1440壁纸 by ThamuzMartu_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/beautiful_autumn_2-wallpaper-2560x1440.jpg",
+        "F:/000-share/picture/wallpaper/blue_crocus_flowers_2-wallpaper-3840x2160.jpg",
+        "F:/000-share/picture/wallpaper/Devils Bridge 桥梁和绿色树木 河流 倒映6k自然风景壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/eva新世纪福音战士 森林 轨道 唯美 2560x1600动漫壁纸高清_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/fall_foliage-wallpaper-2880x1620.jpg",
+        "F:/000-share/picture/wallpaper/Firewatch看火人 黑暗 夜晚 极简主义5k壁纸5120x2880_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/Girl in the forest.png",
+        "F:/000-share/picture/wallpaper/Girl in the forest-without-sign.png",
+        "F:/000-share/picture/wallpaper/infinity-829689.jpg",
+        "F:/000-share/picture/wallpaper/infinity-10637787.jpg",
+        "F:/000-share/picture/wallpaper/Jetbrains-BG夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网-扩图.jpg",
+        "F:/000-share/picture/wallpaper/MacOS Sequoia 内置高清 苹果 6K壁纸 6400x3552_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/MIKU初音未来 可爱小初音宝宝4K动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/misty_forest_road_autumn-wallpaper-3840x2160.jpg",
+        "F:/000-share/picture/wallpaper/summer_sunset_flowers-wallpaper-1920x1080.jpg",
+        "F:/000-share/picture/wallpaper/windows12 壁纸 4k 概念 创意 个性 艺术 电脑 桌面_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/阿尔卑斯山风景4k高清壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/阿尼亚 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/艾瑞丝 盖恩斯巴勒 艾莉丝4k手机壁纸竖屏_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/艾瑞丝 美女艾莉丝4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/艾瑞丝盖恩斯巴勒 最终幻想美女4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/八重神子 报纸 4k壁纸 3840_2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 动漫美女 4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 动漫女孩 长发 4k桌面背景图_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 粉色长发女孩 4K动漫桌面壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 红色裙子动漫女孩4k手机壁纸竖屏_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 金克丝 3440x1440带鱼屏壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 可爱动漫女孩 马尾 蝴蝶结 4k壁纸 3840_2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 可爱马尾辫少女4K电脑壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 可爱又马尾辫女孩 4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙 马尾辫可爱动漫少女4K电脑壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙金发碧眼高马尾女孩4k壁纸3840_2400_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙少女 裙子 黑白风格 4k壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/报纸墙雪之下雪乃2560x1600动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/碧波荡漾 4k风景壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/布兰德福德路 作者 TheWanderingSoul 4K风景壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/草丛精灵4K动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/草原流星4K风景壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/橙色云插画4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/初音未来涂鸦墙4K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/窗 ǽ 玫瑰花 4K壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/窗边雨 初音 4k壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/创意艺术 设计 极光风景 河流 瀑布5k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/吹泡泡的女孩坐在小巷台阶上 ̦޺ 小花 4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/春韵 树 鲜花 春天的风景4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/春韵 树枝小花 春天风景2880x1800分辨率壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/刀剑神域 报纸墙少女 亚丝娜 4k壁纸 3840_2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/岛屿 大海 海滩 棕榈树 房子 云 插画 小岛日落风景4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/地下城与勇士 女孩 小提琴 公园 汽车4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/等公交车的女孩4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/迪士尼小美人鱼4k高清壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/冬天 红色果实 冬季 ѩ 4k壁纸图片_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/冬天 女孩 围巾 4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/动漫 厚涂 女孩 脸 闭眼 尖耳朵 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/动漫女孩 侧脸 光 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/动漫女孩 蝴蝶 出水芙蓉 4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/动漫女孩 树下 遛狗 水果 4k 壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/短发动漫女孩 红色眼睛 个性 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/短发女孩 蓝玫瑰 4K动漫壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/敦煌风美女 绘画 唯美 高清4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/二次元动漫女生 花 天空 4k动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/翻转-夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/房子 鲜花 天空 白云 夕阳 4k风景壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/粉色大波浪女孩 报纸墙 4k动漫壁纸3840_2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/粉色樱花4k高清壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/粉色长发动漫女孩楪祈 4K壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/枫叶,水,秋天,一叶知秋 4k壁纸 3840x2400_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/高地 月亮 云 ɽ 唯美动漫风景4k壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/高山星空唯美背景4k简约壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/古风女孩长发红色衣服4k壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/鬼灭之刃蝴蝶忍4k超高清壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/海边女孩6K动漫壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/海边小屋 花草风景 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/荷花 蜻蜓 5k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/黑白风动漫人物女4k壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/厚涂画 红衣 女子 大眼睛 4k 动漫 壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/花田 女孩 草帽 背影 4K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/灰原哀 高清动漫 4K壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/极光风景 创意设计河流 瀑布5k电脑壁纸5120x2880_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/极简主义 简单的背景 星星 彗星 陨石 行星 矢量艺术4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/极简主义风景5k壁纸5120x2880_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/郊外旅行 爱心泳池 线条小狗4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/静谧 高山 湖泊 鲜花 漂亮风景 4k壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/可爱猫咪4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/可爱神里绫华 报纸墙 4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/孔明灯少女 4K壁纸 3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/扩图-1.jpg",
+        "F:/000-share/picture/wallpaper/扩图-2.jpg",
+        "F:/000-share/picture/wallpaper/两只小青蛙3440x1440带鱼屏壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/旅行者 孩子 奶奶 日落 高山 树 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿海 海浪 唯美艺术抽象风景画4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿河 by_Nikolai Lockertsen 4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿色草地 ¶ˮ 夏 太阳 护眼4k壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿色风景 极简主义 简约 4K电脑壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿色护眼 简约绿色背景一朵玫瑰花4K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿色家园4K风景壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/绿色家园风景2560x1600壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/玫瑰花3440x1440电脑壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/梅花 春天 简约 6K壁纸_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/美丽的海边小屋风景4K壁纸3840x2160_彼岸图网.jpg",
+        "F:/000-share/picture/wallpaper/美丽的渐变山房子简约风景4k壁纸_彼岸图网.jpg",
+      ];
+
+      // #endregion 自定义设置区
+
+      // #region 常量区
       // --- DOM元素获取 ---
       const searchContainer = document.querySelector(".search-container");
       const searchQuery = document.getElementById("search-query");
+      // --- 搜索引擎切换功能 ---
+      const selectedEngine = document.getElementById("selected-engine");
+      const engineOptions = document.getElementById("engine-options");
+      // #endregion 常量区
 
+      // #region  函数区
       // --- 搜索框显示/隐藏功能 ---
 
-      /**
-       * 显示搜索框并聚焦到输入框
-       */
+      // 显示搜索框并聚焦到输入框
       function showSearch() {
         if (searchContainer.classList.contains("hidden")) {
+          searchQuery.value = "";
           searchContainer.classList.remove("hidden");
+          // 保存状态到localStorage
+          localStorage.setItem("isDefaultSearchBoxVisible", "true");
+          AppSettings.isDefaultSearchBoxVisible = true;
         }
         searchQuery.focus();
       }
 
-      /**
-       * 隐藏搜索框并清空输入内容
-       */
+      // 隐藏搜索框并清空输入内容
       function hideSearch() {
         if (!searchContainer.classList.contains("hidden")) {
-          searchQuery.value = "";
           searchContainer.classList.add("hidden");
+          // 保存状态到localStorage
+          localStorage.setItem("isDefaultSearchBoxVisible", "false");
+          AppSettings.isDefaultSearchBoxVisible = false;
         }
       }
+
+      // --- 动态背景图功能 ---
+      function setRandomBackgroundImage(imagePaths) {
+        // 生成一个随机索引
+        const randomIndex = Math.floor(Math.random() * imagePaths.length);
+        // 根据随机索引获取图片路径
+        const randomImage = imagePaths[randomIndex];
+        // 设置body的背景图片
+        document.body.style.backgroundImage = `url('file:///${randomImage}')`;
+      }
+      // #endregion 函数区
+
+      // #region  事件注册区
+      /*
+       * 单击右键时:
+       * 1. 禁用默认右键菜单.
+       * 2. 当搜索框隐藏时, 显示搜索框.
+       * 3. 当点击位置在搜索框之外 且 搜索框显示 且 搜索框内无内容时, 隐藏搜索框.
+       * 4. 右键点击要有防抖功能. 短时间内的多次点击, 视为一次点击.
+       */
+      document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        // 如果点击搜索框本身, 则无需操作.
+        if (searchContainer.contains(event.target)) {
+          return;
+        }
+        if (searchContainer.classList.contains("hidden")) {
+          // 如果搜索框是隐藏的, 则显示搜索框.
+          showSearch();
+        } else if (searchQuery.value === "") {
+          // 如果搜索框是显示的, 且搜索框内无内容, 则隐藏搜索框.
+          hideSearch();
+        }
+      });
 
       // 监听全局键盘事件
       document.addEventListener("keydown", (event) => {
@@ -280,21 +523,6 @@
         }
       });
 
-      // 监听全局双击事件，如果双击搜索框且内容为空，则隐藏搜索框
-      document.addEventListener("dblclick", (event) => {
-        if (
-          searchContainer.contains(event.target) &&
-          searchQuery.value === ""
-        ) {
-          hideSearch();
-        }
-      });
-
-      // --- 搜索引擎切换功能 ---
-      const selectedEngine = document.getElementById("selected-engine");
-      const engineOptions = document.getElementById("engine-options");
-      let currentEngine = "bing"; // 默认搜索引擎
-
       // 点击当前引擎图标，切换下拉菜单的显示/隐藏
       selectedEngine.addEventListener("click", (event) => {
         event.stopPropagation(); // 阻止事件冒泡，防止触发全局点击事件
@@ -305,7 +533,12 @@
       // 为每个引擎选项添加点击事件
       document.querySelectorAll(".engine-option").forEach((option) => {
         option.addEventListener("click", () => {
-          currentEngine = option.dataset.value; // 更新当前引擎
+          AppSettings.defaultSearchEngine = option.dataset.value; // 更新当前引擎
+          // 保存到localStorage
+          localStorage.setItem(
+            "defaultSearchEngine",
+            AppSettings.defaultSearchEngine
+          );
           selectedEngine.innerHTML = option.innerHTML; // 更新显示的图标
           engineOptions.style.display = "none"; // 隐藏下拉菜单
         });
@@ -336,7 +569,7 @@
           let searchUrl;
 
           // 根据当前选择的搜索引擎构建URL
-          switch (currentEngine) {
+          switch (AppSettings.defaultSearchEngine) {
             case "baidu":
               searchUrl = `https://www.baidu.com/s?wd=${encodeURIComponent(
                 query
@@ -360,149 +593,29 @@
           }
         });
 
-      // --- 动态背景图功能 ---
       // 页面加载完成后执行
       document.addEventListener("DOMContentLoaded", () => {
-        // 图片路径列表
-        const imagePaths = [
-          "F:/000-share/picture/wallpaper/0e83e5ac3b69a3b53dbea1b0a88ead4560f4c03b3d8078-Wi3Z7e.png",
-          "F:/000-share/picture/wallpaper/0-JetBrainsBackGround.png",
-          "F:/000-share/picture/wallpaper/01_gettyimages_669360624_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/02_gettyimages_583991178_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/03_gettyimages_846147812_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/04_gettyimages_471418563_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/4k Windows 12 简约 极简 壁纸 电脑 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/4k windows12 微软 创意 设计 高清 电脑 壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/4K 风景 倒影 ɽˮ 平静 高清 壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/05_gettyimages_166041214_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/06_gettyimages_157675600_medium_resized.jpg",
-          "F:/000-share/picture/wallpaper/6K 风景 云 树 草地 ˮ 倒影 绘画 自然 桌面 壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/6k 自然 树 ѩ 湖水 倒影 冬天风景图片壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/07_gettyimages_169396624_high_resized.jpg",
-          "F:/000-share/picture/wallpaper/08_gettyimages_142068861_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/09_gettyimages_108348088_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/10_gettyimages_181866352_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/11_gettyimages_183041629_high_resized.jpg",
-          "F:/000-share/picture/wallpaper/12_gettyimages_495288678_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/13_gettyimages_607293504_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/14_gettyimages_508893814_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/15_gettyimages_516688938_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/16_gettyimages_761608821_high_resized.jpg",
-          "F:/000-share/picture/wallpaper/17_gettyimages_520700958_high_resized.jpg",
-          "F:/000-share/picture/wallpaper/18_gettyimages_592008326_super_resized.jpg",
-          "F:/000-share/picture/wallpaper/2025_06_24_12_51_07.png",
-          "F:/000-share/picture/wallpaper/2025年春节 新年 红色灯笼 鸟儿 喜庆 红花 雪花 4K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/Aetas 唯美动漫风景人物3440x1440壁纸 by ThamuzMartu_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/beautiful_autumn_2-wallpaper-2560x1440.jpg",
-          "F:/000-share/picture/wallpaper/blue_crocus_flowers_2-wallpaper-3840x2160.jpg",
-          "F:/000-share/picture/wallpaper/Devils Bridge 桥梁和绿色树木 河流 倒映6k自然风景壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/eva新世纪福音战士 森林 轨道 唯美 2560x1600动漫壁纸高清_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/fall_foliage-wallpaper-2880x1620.jpg",
-          "F:/000-share/picture/wallpaper/Firewatch看火人 黑暗 夜晚 极简主义5k壁纸5120x2880_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/Girl in the forest.png",
-          "F:/000-share/picture/wallpaper/Girl in the forest-without-sign.png",
-          "F:/000-share/picture/wallpaper/infinity-829689.jpg",
-          "F:/000-share/picture/wallpaper/infinity-10637787.jpg",
-          "F:/000-share/picture/wallpaper/Jetbrains-BG夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网-扩图.jpg",
-          "F:/000-share/picture/wallpaper/MacOS Sequoia 内置高清 苹果 6K壁纸 6400x3552_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/MIKU初音未来 可爱小初音宝宝4K动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/misty_forest_road_autumn-wallpaper-3840x2160.jpg",
-          "F:/000-share/picture/wallpaper/summer_sunset_flowers-wallpaper-1920x1080.jpg",
-          "F:/000-share/picture/wallpaper/windows12 壁纸 4k 概念 创意 个性 艺术 电脑 桌面_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/阿尔卑斯山风景4k高清壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/阿尼亚 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/艾瑞丝 盖恩斯巴勒 艾莉丝4k手机壁纸竖屏_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/艾瑞丝 美女艾莉丝4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/艾瑞丝盖恩斯巴勒 最终幻想美女4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/八重神子 报纸 4k壁纸 3840_2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 动漫美女 4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 动漫女孩 长发 4k桌面背景图_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 粉色长发女孩 4K动漫桌面壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 红色裙子动漫女孩4k手机壁纸竖屏_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 金克丝 3440x1440带鱼屏壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 可爱动漫女孩 马尾 蝴蝶结 4k壁纸 3840_2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 可爱马尾辫少女4K电脑壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 可爱又马尾辫女孩 4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙 马尾辫可爱动漫少女4K电脑壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙金发碧眼高马尾女孩4k壁纸3840_2400_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙少女 裙子 黑白风格 4k壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/报纸墙雪之下雪乃2560x1600动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/碧波荡漾 4k风景壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/布兰德福德路 作者 TheWanderingSoul 4K风景壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/草丛精灵4K动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/草原流星4K风景壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/橙色云插画4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/初音未来涂鸦墙4K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/窗 ǽ 玫瑰花 4K壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/窗边雨 初音 4k壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/创意艺术 设计 极光风景 河流 瀑布5k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/吹泡泡的女孩坐在小巷台阶上 ̦޺ 小花 4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/春韵 树 鲜花 春天的风景4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/春韵 树枝小花 春天风景2880x1800分辨率壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/刀剑神域 报纸墙少女 亚丝娜 4k壁纸 3840_2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/岛屿 大海 海滩 棕榈树 房子 云 插画 小岛日落风景4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/地下城与勇士 女孩 小提琴 公园 汽车4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/等公交车的女孩4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/迪士尼小美人鱼4k高清壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/冬天 红色果实 冬季 ѩ 4k壁纸图片_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/冬天 女孩 围巾 4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/动漫 厚涂 女孩 脸 闭眼 尖耳朵 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/动漫女孩 侧脸 光 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/动漫女孩 蝴蝶 出水芙蓉 4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/动漫女孩 树下 遛狗 水果 4k 壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/短发动漫女孩 红色眼睛 个性 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/短发女孩 蓝玫瑰 4K动漫壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/敦煌风美女 绘画 唯美 高清4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/二次元动漫女生 花 天空 4k动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/翻转-夜晚 森林 发光 蝴蝶 美女 长剑 5K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/房子 鲜花 天空 白云 夕阳 4k风景壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/粉色大波浪女孩 报纸墙 4k动漫壁纸3840_2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/粉色樱花4k高清壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/粉色长发动漫女孩楪祈 4K壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/枫叶,水,秋天,一叶知秋 4k壁纸 3840x2400_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/高地 月亮 云 ɽ 唯美动漫风景4k壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/高山星空唯美背景4k简约壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/古风女孩长发红色衣服4k壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/鬼灭之刃蝴蝶忍4k超高清壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/海边女孩6K动漫壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/海边小屋 花草风景 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/荷花 蜻蜓 5k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/黑白风动漫人物女4k壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/厚涂画 红衣 女子 大眼睛 4k 动漫 壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/花田 女孩 草帽 背影 4K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/灰原哀 高清动漫 4K壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/极光风景 创意设计河流 瀑布5k电脑壁纸5120x2880_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/极简主义 简单的背景 星星 彗星 陨石 行星 矢量艺术4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/极简主义风景5k壁纸5120x2880_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/郊外旅行 爱心泳池 线条小狗4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/静谧 高山 湖泊 鲜花 漂亮风景 4k壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/可爱猫咪4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/可爱神里绫华 报纸墙 4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/孔明灯少女 4K壁纸 3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/扩图-1.jpg",
-          "F:/000-share/picture/wallpaper/扩图-2.jpg",
-          "F:/000-share/picture/wallpaper/两只小青蛙3440x1440带鱼屏壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/旅行者 孩子 奶奶 日落 高山 树 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿海 海浪 唯美艺术抽象风景画4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿河 by_Nikolai Lockertsen 4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿色草地 ¶ˮ 夏 太阳 护眼4k壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿色风景 极简主义 简约 4K电脑壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿色护眼 简约绿色背景一朵玫瑰花4K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿色家园4K风景壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/绿色家园风景2560x1600壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/玫瑰花3440x1440电脑壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/梅花 春天 简约 6K壁纸_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/美丽的海边小屋风景4K壁纸3840x2160_彼岸图网.jpg",
-          "F:/000-share/picture/wallpaper/美丽的渐变山房子简约风景4k壁纸_彼岸图网.jpg",
-        ];
+        // 首先加载设置
+        loadSettings();
 
-        // 生成一个随机索引
-        const randomIndex = Math.floor(Math.random() * imagePaths.length);
-        // 根据随机索引获取图片路径
-        const randomImage = imagePaths[randomIndex];
-        // 设置body的背景图片
-        document.body.style.backgroundImage = `url('file:///${randomImage}')`;
+        // 初始化当前搜索引擎图标
+        selectedEngine.innerHTML = searchContainer.querySelector(
+          `div[data-value="${AppSettings.defaultSearchEngine}"]`
+        ).innerHTML;
+
+        // 设置随机背景图片
+        setRandomBackgroundImage(images);
+
+        // 根据从localStorage加载的设置来决定是否显示搜索框
+        if (AppSettings.isDefaultSearchBoxVisible) {
+          showSearch();
+        } else {
+          // 如果设置为不显示，则确保是隐藏状态
+          hideSearch();
+          searchContainer.classList.add("hidden");
+        }
       });
+      // #endregion 事件注册区
     </script>
   </body>
 </html>
