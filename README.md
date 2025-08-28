@@ -36,8 +36,8 @@ A minimalist and elegant browser homepage with dynamic backgrounds and a multi-e
 
 1.  **Background Images:**
     - Open the `homepage.iWonder.html` file.
-    - Locate the `const images = [...]` array in the `<script>` section.
-    - Replace the example file paths with the absolute paths to your own images.
+    - Locate the `const config = {...}` -> `images: [...]` array in the `<script>` section.
+    - Replace the example file paths in array with the absolute paths to your own images.
 
 2.  **Default Settings:**
     - In the same `<script>` section, you can find the `AppSettings` object.

@@ -34,8 +34,8 @@
 
 1.  **背景图片:**
     - 打开 `homepage.iWonder.html` 文件。
-    - 在 `<script>` 部分找到 `const images = [...]` 数组。
-    - 将示例文件路径替换为您自己图片的绝对路径。
+    - 在 `<script>` 部分找到 `const config = {...}` 中的 `images: [...]` 数组。
+    - 将数组中的示例文件路径替换为您自己图片的绝对路径。
 
 2.  **默认设置:**
     - 在同一个 `<script>` 部分，您可以找到 `AppSettings` 对象。
